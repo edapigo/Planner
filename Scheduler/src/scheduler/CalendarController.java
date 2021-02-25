@@ -24,14 +24,16 @@ import javafx.stage.Stage;
  */
 public class CalendarController implements Initializable {
 
+    //Button to close GUI window
     @FXML
     private void close(ActionEvent event) {
         System.exit(0);
     }
-    
+
+    // Button for user to logout
     @FXML
-    public void login(ActionEvent event) throws IOException{
-        Parent calendar = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+    public void logout(ActionEvent event) throws IOException{
+        Parent calendar = FXMLLoader.load(getClass().getResource("Login.fxml"));
         Scene loginScreen = new Scene(calendar);
         
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();

@@ -15,6 +15,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
@@ -25,18 +27,41 @@ import javafx.stage.Stage;
 public class CreateAccountController implements Initializable {
 
     @FXML
+    private TextField email;            // valid email
+    @FXML
+    private TextField username;         // check if username is taken
+    @FXML
+    private PasswordField password;     // at least 6 characters long
+    @FXML
+    private PasswordField verifyPw;     // check that both PasswordFields match
+    
+    // Button to close GUI window
+    @FXML
     private void close(ActionEvent event) {
         System.exit(0);
     }
     
+    // Button that returns to user login
     @FXML
     public void login(ActionEvent event) throws IOException{
-        Parent createAccount = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Parent createAccount = FXMLLoader.load(getClass().getResource("Login.fxml"));
         Scene loginScreen = new Scene(createAccount);
         
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         
         window.setScene(loginScreen);
+        window.show();
+    }
+    
+    // After account creation return to login screen
+    @FXML
+    public void createAccount(ActionEvent event) throws IOException{
+        Parent loginScreen = FXMLLoader.load(getClass().getResource("Login.fxml"));
+        Scene createAccount = new Scene(loginScreen);
+        
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        window.setScene(createAccount);
         window.show();
     }
     

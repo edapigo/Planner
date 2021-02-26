@@ -5,11 +5,13 @@
  */
 package scheduler;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -35,7 +37,7 @@ public class LoginController implements Initializable {
     private PasswordField password;
     @FXML
     private Text incorrectLogin;
-    
+        
     // Button to close GUI window
     @FXML
     private void close(ActionEvent event) {
@@ -63,36 +65,42 @@ public class LoginController implements Initializable {
         boolean auth = false;
         boolean error = true;
         
-        Parent loginScreen = FXMLLoader.load(getClass().getResource("Calendar.fxml"));
-        Scene calendarScreen = new Scene(loginScreen);
-
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
         while (!auth && error){        
-            BufferedReader br = null;
-            try{	
-                br = new BufferedReader(new FileReader("accounts.txt"));		
-                String line = br.readLine();
-                while (line != null) {
-                    if (username.getText().contentEquals(line.split(",")[0]) &&
-                            password.getText().contentEquals(line.split(",")[1])){
+            try {
+                Connection connect = DriverManager.getConnection(Scheduler.CONN_STRING, Scheduler.USERNAME, Scheduler.PASSWORD);
+                SchedulerDatabase data = new SchedulerDatabase(connect);
+                Statement query = connect.createStatement();
+                String showAccounts = "SELECT username, passwd FROM Accounts;";
+                ResultSet accountsData = query.executeQuery(showAccounts);
+                
+                while(accountsData.next()){
+                    System.out.println(username.getText().contentEquals(accountsData.getString(1)));
+                    System.out.println(password.getText().contentEquals(accountsData.getString(2)));
+                    System.out.println("");
+                    
+                    if (username.getText().contentEquals(accountsData.getString(1)) &&
+                            password.getText().contentEquals(accountsData.getString(2))){
                         auth = true;
                         error = false;
+                        
+                        Parent loginScreen = FXMLLoader.load(getClass().getResource("Calendar.fxml"));
+                        Scene calendarScreen = new Scene(loginScreen);
+
+                        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+                        
                         window.setScene(calendarScreen);
+                        window.show();
                     }
-                    line = br.readLine();
                 }
+                
                 if (error){
                     incorrectLogin.setText("Nombre de usuario o contraseña incorrecto.\nPor favor, intente de nuevo.");
                     error = false;
                 }
-            } 
-            catch (FileNotFoundException fnfEx){
-                fnfEx.printStackTrace();
+            } catch(SQLException sqlEx){
+                sqlEx.printStackTrace();
             }
-            
         }
-        window.show();
     }
 
     

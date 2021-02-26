@@ -18,6 +18,10 @@ import javafx.stage.StageStyle;
  */
 public class Scheduler extends Application {
     
+    public static final String USERNAME = "root";                                      // estudiante
+    public static final String PASSWORD = "1234";                                      // XTGS41zA
+    public static final String CONN_STRING = "jdbc:mysql://localhost:3306/Scheduler";  // 35.185.90.173
+        
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));

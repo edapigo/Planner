@@ -1,4 +1,0 @@
-username,password,email
-jxpita,170596,jxpita@espol.edu.ec
-edapigo,marik6,eapg@hotmail.es
-randomUser,123456,random@email.com

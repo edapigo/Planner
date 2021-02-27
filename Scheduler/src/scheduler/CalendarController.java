@@ -8,13 +8,13 @@ package scheduler;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
@@ -26,22 +26,25 @@ public class CalendarController implements Initializable {
 
     //Button to close GUI window
     @FXML
-    private void close(ActionEvent event) {
+    public void close(MouseEvent click) {
         System.exit(0);
     }
 
     // Button for user to logout
     @FXML
-    public void logout(ActionEvent event) throws IOException{
+    public void logout(MouseEvent click) throws IOException{
         Parent calendar = FXMLLoader.load(getClass().getResource("Login.fxml"));
         Scene loginScreen = new Scene(calendar);
         
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage window = (Stage)((Node)click.getSource()).getScene().getWindow();
         
         window.setScene(loginScreen);
         window.show();
     }
     
+    public void test(MouseEvent click){
+        System.exit(0);
+    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {

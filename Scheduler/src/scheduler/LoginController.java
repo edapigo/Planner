@@ -22,6 +22,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -40,7 +41,7 @@ public class LoginController implements Initializable {
         
     // Button to close GUI window
     @FXML
-    private void close(ActionEvent event) {
+    public void close(MouseEvent click) {
         System.exit(0);
     }
     
@@ -74,11 +75,7 @@ public class LoginController implements Initializable {
                 ResultSet accountsData = query.executeQuery(showAccounts);
                 
                 while(accountsData.next()){
-                    System.out.println(username.getText().contentEquals(accountsData.getString(1)));
-                    System.out.println(password.getText().contentEquals(accountsData.getString(2)));
-                    System.out.println("");
-                    
-                    if (username.getText().contentEquals(accountsData.getString(1)) &&
+                    if (username.getText().toLowerCase().contentEquals(accountsData.getString(1).toLowerCase()) &&
                             password.getText().contentEquals(accountsData.getString(2))){
                         auth = true;
                         error = false;
@@ -102,8 +99,8 @@ public class LoginController implements Initializable {
             }
         }
     }
-
     
+        
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

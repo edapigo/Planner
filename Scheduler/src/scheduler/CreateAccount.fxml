@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -44,33 +45,28 @@
                   <Font size="13.0" />
                </font>
             </PasswordField>
-            <Button layoutX="50.0" layoutY="360.0" mnemonicParsing="false" onAction="#createAccount" prefHeight="30.0" prefWidth="250.0" text="Crear cuenta" textFill="#000000c0">
+            <Button layoutX="50.0" layoutY="360.0" mnemonicParsing="false" onAction="#createAccount" prefHeight="30.0" prefWidth="250.0" text="Crear cuenta" textFill="#000000a0">
                <effect>
                   <Glow />
                </effect>
                <font>
                   <Font size="13.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="holi" />
+               </tooltip>
             </Button>
          </children>
       </AnchorPane>
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutY="-1.0" mnemonicParsing="false" onAction="#login" prefHeight="30.0" prefWidth="36.0" style="-fx-background-color: #ffffff;">
-         <graphic>
-            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../resources/return.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button contentDisplay="CENTER" layoutX="864.0" mnemonicParsing="false" onAction="#close" prefHeight="30.0" prefWidth="36.0" style="-fx-background-color: #ffffff;">
-         <graphic>
-            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../resources/close.PNG" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
+      <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/return.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="869.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/close.PNG" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

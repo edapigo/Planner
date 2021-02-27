@@ -1,43 +1,199 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: #6F9DD3;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scheduler.CalendarController">
    <children>
-      <Label alignment="CENTER" layoutX="225.0" layoutY="200.0" prefHeight="250.0" prefWidth="450.0" text="Calendar not available yet" textFill="#d5d5d5" visible="false">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="1.0" layoutY="24.0" prefHeight="30.0" prefWidth="23.0" text="&lt;" textFill="WHITE">
          <font>
             <Font name="System Bold" size="32.0" />
          </font>
+         <tooltip>
+            <Tooltip text="Mes Anterior">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Tooltip>
+         </tooltip>
       </Label>
-      <Button layoutX="1.0" mnemonicParsing="false" onAction="#logout" prefHeight="30.0" prefWidth="36.0" style="-fx-background-color: #ffffff;">
-         <graphic>
-            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../resources/logout.PNG" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button layoutX="864.0" mnemonicParsing="false" onAction="#close" prefHeight="30.0" prefWidth="36.0" style="-fx-background-color: #ffffff;">
-         <graphic>
-            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../resources/close.PNG" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <HBox layoutY="49.0" prefHeight="50.0" prefWidth="900.0" />
-      <GridPane layoutX="1.0" layoutY="100.0" prefHeight="550.0" prefWidth="900.0">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="19.0" layoutY="34.0" prefHeight="30.0" prefWidth="120.0" text="Septiembre" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <tooltip>
+            <Tooltip>
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Tooltip>
+         </tooltip>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="132.0" layoutY="24.0" prefHeight="30.0" prefWidth="23.0" text="&gt;" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+         <tooltip>
+            <Tooltip text="Mes Siguiente">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Tooltip>
+         </tooltip>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="808.0" layoutY="24.0" prefHeight="30.0" prefWidth="23.0" text="&lt;" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+         <tooltip>
+            <Tooltip text="Año Anterior">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Tooltip>
+         </tooltip>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="824.0" layoutY="34.0" prefHeight="30.0" prefWidth="60.0" text="2021" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <tooltip>
+            <Tooltip>
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Tooltip>
+         </tooltip>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="877.0" layoutY="24.0" prefHeight="30.0" prefWidth="23.0" text="&gt;" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+         <tooltip>
+            <Tooltip text="Año Siguiente">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Tooltip>
+         </tooltip>
+      </Label>
+      <GridPane gridLinesVisible="true" layoutY="68.0" prefHeight="56.0" prefWidth="900.0" style="-fx-background-color: #4A688C;">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="120.0" text="Lunes" GridPane.halignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+                     <stops>
+                        <Stop color="#c7ccd181" />
+                        <Stop color="WHITE" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="120.0" text="Martes" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+                     <stops>
+                        <Stop color="#c7ccd180" />
+                        <Stop color="WHITE" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="120.0" text="Miércoles" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+                     <stops>
+                        <Stop color="#c7ccd180" />
+                        <Stop color="WHITE" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="120.0" text="Jueves" GridPane.columnIndex="3">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+                     <stops>
+                        <Stop color="#c7ccd180" />
+                        <Stop color="WHITE" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="120.0" text="Viernes" GridPane.columnIndex="4">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+                     <stops>
+                        <Stop color="#c7ccd180" />
+                        <Stop color="WHITE" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="120.0" text="Sábado" GridPane.columnIndex="5">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+                     <stops>
+                        <Stop color="#c7ccd180" />
+                        <Stop color="WHITE" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="120.0" text="Domingo" GridPane.columnIndex="6">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+                     <stops>
+                        <Stop color="#c7ccd180" />
+                        <Stop color="WHITE" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
+         </children>
+      </GridPane>
+      <GridPane gridLinesVisible="true" layoutY="124.0" prefHeight="526.0" prefWidth="900.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -48,13 +204,25 @@
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
+         <children>
+            <AnchorPane prefHeight="110.0" prefWidth="130.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+         </children>
       </GridPane>
+      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="1.0" onMouseClicked="#logout" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/logout.PNG" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="870.0" onMouseClicked="#close" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/close.PNG" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

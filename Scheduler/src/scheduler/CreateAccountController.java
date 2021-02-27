@@ -17,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
@@ -37,7 +38,7 @@ public class CreateAccountController implements Initializable {
     
     // Button to close GUI window
     @FXML
-    private void close(ActionEvent event) {
+    public void close(MouseEvent click) {
         System.exit(0);
     }
     

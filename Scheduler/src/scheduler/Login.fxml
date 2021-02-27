@@ -5,12 +5,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -26,7 +25,7 @@
             <Font size="13.0" />
          </font>
       </Label>
-      <Button layoutX="168.0" layoutY="489.0" mnemonicParsing="false" onAction="#createAccount" prefHeight="26.0" prefWidth="129.0" text="Crear cuenta" textFill="#909396" />
+      <Button layoutX="168.0" layoutY="489.0" mnemonicParsing="false" onAction="#createAccount" prefHeight="26.0" prefWidth="129.0" text="Crear cuenta" textFill="#909396" textOverrun="CENTER_ELLIPSIS" />
       <AnchorPane layoutX="489.0" layoutY="100.0" prefHeight="450.0" prefWidth="350.0" style="-fx-background-color: #C6CCD2;">
          <children>
             <Label alignment="CENTER" layoutX="50.0" layoutY="40.0" prefHeight="69.0" prefWidth="250.0" text="Inicio de sesión" textFill="#00000070">
@@ -44,13 +43,16 @@
                   <Font size="13.0" />
                </font>
             </PasswordField>
-            <Button contentDisplay="CENTER" layoutX="50.0" layoutY="292.0" mnemonicParsing="false" onAction="#calendarScreen" prefHeight="30.0" prefWidth="250.0" text="Iniciar sesión" textAlignment="CENTER" textFill="#000000c0" textOverrun="CENTER_ELLIPSIS">
+            <Button contentDisplay="CENTER" layoutX="50.0" layoutY="292.0" mnemonicParsing="false" onAction="#calendarScreen" prefHeight="30.0" prefWidth="250.0" text="Iniciar sesión" textAlignment="CENTER" textFill="#000000a0" textOverrun="CENTER_ELLIPSIS">
                <effect>
                   <Glow />
                </effect>
                <font>
                   <Font size="13.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="holiiiiiiii" />
+               </tooltip>
             </Button>
             <Hyperlink layoutX="50.0" layoutY="322.0" text="¿Olvidó su contraseña?" textFill="#a49a9a">
                <font>
@@ -64,22 +66,10 @@
             </Text>
          </children>
       </AnchorPane>
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="864.0" mnemonicParsing="false" onAction="#close" prefHeight="30.0" prefWidth="36.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
-         <graphic>
-            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../resources/close.PNG" />
-               </image>
-            </ImageView>
-         </graphic>
-         <textFill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop color="TRANSPARENT" />
-                  <Stop color="WHITE" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </textFill>
-      </Button>
+      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="869.0" onMouseClicked="#close" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/close.PNG" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

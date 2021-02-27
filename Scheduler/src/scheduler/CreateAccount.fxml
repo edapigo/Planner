@@ -58,12 +58,12 @@
             </Button>
          </children>
       </AnchorPane>
-      <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="30.0" fitWidth="30.0" onMouseClicked="#login" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../resources/return.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="869.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="869.0" onMouseClicked="#close" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../resources/close.PNG" />
          </image>

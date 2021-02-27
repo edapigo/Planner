@@ -44,11 +44,11 @@ public class CreateAccountController implements Initializable {
     
     // Button that returns to user login
     @FXML
-    public void login(ActionEvent event) throws IOException{
+    public void login(MouseEvent click) throws IOException{
         Parent createAccount = FXMLLoader.load(getClass().getResource("Login.fxml"));
         Scene loginScreen = new Scene(createAccount);
         
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage window = (Stage)((Node)click.getSource()).getScene().getWindow();
         
         window.setScene(loginScreen);
         window.show();

@@ -71,6 +71,8 @@ public class LoginController implements Initializable {
                 Connection connect = DriverManager.getConnection(Scheduler.CONN_STRING, Scheduler.USERNAME, Scheduler.PASSWORD);
                 SchedulerDatabase data = new SchedulerDatabase(connect);
                 Statement query = connect.createStatement();
+                String useSchedulerDB = "USE Scheduler;";
+                query.executeQuery(useSchedulerDB);
                 String showAccounts = "SELECT username, passwd FROM Accounts;";
                 ResultSet accountsData = query.executeQuery(showAccounts);
                 

@@ -7,8 +7,6 @@ package scheduler;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -68,17 +66,13 @@ public class LoginController implements Initializable {
         
         while (!auth && error){        
             try {
-                Connection connect = DriverManager.getConnection(Scheduler.CONN_STRING, Scheduler.USERNAME, Scheduler.PASSWORD);
-                SchedulerDatabase data = new SchedulerDatabase(connect);
-                Statement query = connect.createStatement();
-                String useSchedulerDB = "USE Scheduler;";
-                query.executeQuery(useSchedulerDB);
-                String showAccounts = "SELECT username, passwd FROM Accounts;";
-                ResultSet accountsData = query.executeQuery(showAccounts);
+                Statement query = Scheduler.connect.createStatement();
+                query.executeQuery("USE Scheduler;");
+                ResultSet accountsData = query.executeQuery("SELECT username, passwd FROM Accounts;");
                 
                 while(accountsData.next()){
                     if (username.getText().toLowerCase().contentEquals(accountsData.getString(1).toLowerCase()) &&
-                            password.getText().contentEquals(accountsData.getString(2))){
+                        password.getText().contentEquals(accountsData.getString(2))){
                         auth = true;
                         error = false;
                         
@@ -91,7 +85,6 @@ public class LoginController implements Initializable {
                         window.show();
                     }
                 }
-                
                 if (error){
                     incorrectLogin.setText("Nombre de usuario o contraseña incorrecto.\nPor favor, intente de nuevo.");
                     error = false;

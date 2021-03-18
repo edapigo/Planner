@@ -20,32 +20,42 @@
       </ImageView>
       <AnchorPane layoutX="489.0" layoutY="100.0" prefHeight="450.0" prefWidth="350.0" style="-fx-background-color: #C6CCD2;">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="50.0" layoutY="40.0" prefHeight="70.0" prefWidth="250.0" text="Creación de cuenta" textAlignment="CENTER" textFill="#00000070" textOverrun="CENTER_ELLIPSIS">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="50.0" layoutY="20.0" prefHeight="70.0" prefWidth="250.0" text="Creación de cuenta" textAlignment="CENTER" textFill="#00000070" textOverrun="CENTER_ELLIPSIS">
                <font>
                   <Font size="26.0" />
                </font>
             </Label>
-            <TextField fx:id="email" layoutX="50.0" layoutY="135.0" prefHeight="30.0" prefWidth="250.0" promptText="Correo electrónico" style="-fx-background-color: #E5E8EB;">
+            <TextField fx:id="fName" focusTraversable="false" layoutX="50.0" layoutY="110.0" prefHeight="30.0" prefWidth="250.0" promptText="Nombre" style="-fx-background-color: #E5E8EB;">
                <font>
                   <Font size="13.0" />
                </font>
             </TextField>
-            <TextField fx:id="username" layoutX="50.0" layoutY="183.0" prefHeight="30.0" prefWidth="250.0" promptText="Nombre de usuario" style="-fx-background-color: #E5E8EB;">
+            <TextField fx:id="lName" focusTraversable="false" layoutX="50.0" layoutY="150.0" prefHeight="30.0" prefWidth="250.0" promptText="Apellido" style="-fx-background-color: #E5E8EB;">
                <font>
                   <Font size="13.0" />
                </font>
             </TextField>
-            <PasswordField fx:id="password" layoutX="50.0" layoutY="232.0" prefHeight="30.0" prefWidth="250.0" promptText="Contraseña" style="-fx-background-color: #E5E8EB;">
+            <TextField fx:id="username" focusTraversable="false" layoutX="50.0" layoutY="190.0" prefHeight="30.0" prefWidth="250.0" promptText="Nombre de usuario" style="-fx-background-color: #E5E8EB;">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </TextField>
+            <PasswordField fx:id="password" focusTraversable="false" layoutX="50.0" layoutY="230.0" prefHeight="30.0" prefWidth="250.0" promptText="Contraseña" style="-fx-background-color: #E5E8EB;">
                <font>
                   <Font size="13.0" />
                </font>
             </PasswordField>
-            <PasswordField fx:id="verifyPw" layoutX="50.0" layoutY="280.0" prefHeight="30.0" prefWidth="250.0" promptText="Repetir contraseña" style="-fx-background-color: #E5E8EB;">
+            <PasswordField fx:id="verifyPw" focusTraversable="false" layoutX="50.0" layoutY="270.0" prefHeight="30.0" prefWidth="250.0" promptText="Repetir contraseña" style="-fx-background-color: #E5E8EB;">
                <font>
                   <Font size="13.0" />
                </font>
             </PasswordField>
-            <Button layoutX="50.0" layoutY="360.0" mnemonicParsing="false" onAction="#createAccount" prefHeight="30.0" prefWidth="250.0" text="Crear cuenta" textFill="#000000a0">
+            <TextField fx:id="email" focusTraversable="false" layoutX="50.0" layoutY="310.0" prefHeight="30.0" prefWidth="250.0" promptText="Correo electrónico" style="-fx-background-color: #E5E8EB;">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </TextField>
+            <Button layoutX="50.0" layoutY="380.0" mnemonicParsing="false" onAction="#createAccount" prefHeight="30.0" prefWidth="250.0" text="Crear cuenta" textFill="#000000a0">
                <effect>
                   <Glow />
                </effect>

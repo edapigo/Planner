@@ -5,6 +5,9 @@
  */
 package scheduler;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,11 +24,12 @@ public class Scheduler extends Application {
     public static final String USERNAME = "root";                                      // estudiante
     public static final String PASSWORD = "1234";                                      // XTGS41zA
     public static final String CONN_STRING = "jdbc:mysql://localhost:3306/Scheduler";  // 35.185.90.173
-        
+    public static Connection connect;
+    
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
-        stage.initStyle(StageStyle.DECORATED.UNDECORATED);
+        stage.initStyle(StageStyle.DECORATED);
         
         Scene scene = new Scene(root);
         
@@ -37,6 +41,12 @@ public class Scheduler extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        try{
+            connect = DriverManager.getConnection(Scheduler.CONN_STRING, Scheduler.USERNAME, Scheduler.PASSWORD);
+        } catch(SQLException sqlEx) {
+            sqlEx.printStackTrace();
+        }
+        
         launch(args);
     }
     

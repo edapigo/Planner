@@ -7,6 +7,8 @@ package scheduler;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,13 +30,18 @@ import javafx.stage.Stage;
 public class CreateAccountController implements Initializable {
 
     @FXML
-    private TextField email;            // valid email
+    private TextField fName;    // check that text is alphabetic
     @FXML
-    private TextField username;         // check if username is taken
+    private TextField lName;    // check that text is alphabetic
     @FXML
-    private PasswordField password;     // at least 6 characters long
+    private TextField username;     // check that text is alphanumeric
     @FXML
-    private PasswordField verifyPw;     // check that both PasswordFields match
+    private PasswordField password;     // at least 8 characters long
+    @FXML
+    private PasswordField verifyPw;     // check that text matches original password
+    @FXML
+    private TextField email;    // check that text contains valid email address
+    
     
     // Button to close GUI window
     @FXML
@@ -57,13 +64,24 @@ public class CreateAccountController implements Initializable {
     // After account creation return to login screen
     @FXML
     public void createAccount(ActionEvent event) throws IOException{
-        Parent loginScreen = FXMLLoader.load(getClass().getResource("Login.fxml"));
-        Scene createAccount = new Scene(loginScreen);
+        try {
+            Statement query = Scheduler.connect.createStatement();
+            query.executeQuery("USE Scheduler;");
+            // ResultSet accountsData = query.executeQuery("SELECT username, passwd FROM Accounts;");
+                
+            
+            
+            Parent loginScreen = FXMLLoader.load(getClass().getResource("Login.fxml"));
+            Scene createAccount = new Scene(loginScreen);
+
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+            window.setScene(createAccount);
+            window.show();
+        } catch(SQLException sqlEx) {
+            sqlEx.printStackTrace();
+        }
         
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
-        window.setScene(createAccount);
-        window.show();
     }
     
     

@@ -59,6 +59,7 @@ public class CalendarController implements Initializable {
     public void logout(MouseEvent click) throws IOException {
         Parent calendar = FXMLLoader.load(getClass().getResource("Login.fxml"));
         Scene loginScreen = new Scene(calendar);
+        loginScreen.getWindow();
 
         Stage window = (Stage) ((Node) click.getSource()).getScene().getWindow();
 

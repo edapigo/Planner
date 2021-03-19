@@ -21,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -31,60 +32,56 @@ import javafx.stage.Stage;
 public class LoginController implements Initializable {
     
     @FXML
+    private VBox loginData;
+    @FXML
     private TextField username;
     @FXML
     private PasswordField password;
     @FXML
     private Text incorrectLogin;
         
-    // Button to close GUI window
+    // Button to closeButton GUI window
     @FXML
-    public void close(MouseEvent click) {
+    public void closeButton(MouseEvent click) {
         System.exit(0);
     }
     
     // Button that shows Account Creation screen
     @FXML
-    public void createAccount(ActionEvent event) throws IOException{
-        Parent loginScreen = FXMLLoader.load(getClass().getResource("CreateAccount.fxml"));
-        Scene createAccount = new Scene(loginScreen);
-        
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
-        window.setScene(createAccount);
-        window.show();
+    public void createAccountButton(ActionEvent event) {
+        try {
+            Parent loginScreen = FXMLLoader.load(getClass().getResource("CreateAccount.fxml"));
+            Scene createAccount = new Scene(loginScreen);
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+            window.setScene(createAccount);
+            window.show();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
     
     // Screen to show after user login
     @FXML
-    public void calendarScreen(ActionEvent event){
-        
+    public void loginButton(ActionEvent event){
         try {
             Statement query = Scheduler.connect.createStatement();
             query.executeQuery("USE Scheduler;");
             ResultSet accountsData = query.executeQuery("SELECT username, passwd FROM Accounts;");
-            accountsData.next();
-            
-            while (!(username.getText().toLowerCase().contentEquals(accountsData.getString(1).toLowerCase()) &&
-                    password.getText().contentEquals(accountsData.getString(2))) && accountsData.next()) {
-                if (username.getText().toLowerCase().contentEquals(accountsData.getString(1).toLowerCase()) &&
-                    password.getText().contentEquals(accountsData.getString(2))){
-
+            accountsData.next();            
+            boolean valid = false;
+            while (!valid && accountsData.next()) {
+                valid = username.getText().toLowerCase().contentEquals(accountsData.getString(1).toLowerCase()) && 
+                        password.getText().contentEquals(accountsData.getString(2));
+                if (valid) {
                     Parent loginScreen = FXMLLoader.load(getClass().getResource("Calendar.fxml"));
                     Scene calendarScreen = new Scene(loginScreen);
-
                     Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-
                     window.setScene(calendarScreen);
                     window.show();
-                } else {
-                    incorrectLogin.setText("Nombre de usuario o contraseña incorrecto.\nPor favor, intente de nuevo.");
-                }
-            } query.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+                } else incorrectLogin.setText("Nombre de usuario o contraseña incorrecto.\nPor favor, intente de nuevo.");
+            } query.close(); 
+        } catch (IOException | SQLException ex) {
+            System.out.println(ex.getMessage());
         }
     }
     

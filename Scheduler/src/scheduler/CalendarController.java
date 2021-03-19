@@ -32,38 +32,39 @@ public class CalendarController implements Initializable {
 
     @FXML
     private GridPane calendar;
-
+    
     private YearMonth currentYearMonth;
-
     private ArrayList<AnchorPaneNode> daysOfCalendar = new ArrayList<>(35);
 
-        
-    // Arrays of the months
+    // Monthnames array
     String[] months = new String[]{"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto",
          "Septiembre", "Octubre", "Noviembre", "Diciembre"};
 
     @FXML
     private Label month;
-
     @FXML
     private Label year;
-
-    //Button to close GUI window
+    
+    //Button to closeButton GUI window
     @FXML
-    public void close(MouseEvent click) {
+    public void closeButton(MouseEvent click) {
         System.exit(0);
     }
 
-    // Button for user to logout
+    // Button for user to logoutButton
     @FXML
-    public void logout(MouseEvent click) throws IOException {
-        Parent calendar = FXMLLoader.load(getClass().getResource("Login.fxml"));
-        Scene loginScreen = new Scene(calendar);
+    public void logoutButton(MouseEvent click) {
+        try {
+            Parent calendar = FXMLLoader.load(getClass().getResource("Login.fxml"));
+            Scene loginScreen = new Scene(calendar);
 
-        Stage window = (Stage) ((Node) click.getSource()).getScene().getWindow();
+            Stage window = (Stage) ((Node) click.getSource()).getScene().getWindow();
 
-        window.setScene(loginScreen);
-        window.show();
+            window.setScene(loginScreen);
+            window.show();
+            } catch (IOException ex) {
+            ex.printStackTrace();
+            }
     }
 
     public void test(MouseEvent click) {
@@ -114,34 +115,34 @@ public class CalendarController implements Initializable {
         }
     }
 
-    //Label to change to the next month
-    @FXML
-    public void nextMonth(MouseEvent event) {
-        currentYearMonth = currentYearMonth.plusMonths(1);
-        month.setText(months[currentYearMonth.getMonthValue() - 1]);
-        updateCalendar(currentYearMonth);
-    }
-
     //Label to change to the previous month
     @FXML
-    public void previousMonth(MouseEvent event) {
+    public void previousMonthButton(MouseEvent event) {
         currentYearMonth = currentYearMonth.minusMonths(1);
         month.setText(months[currentYearMonth.getMonthValue() - 1]);
         updateCalendar(currentYearMonth);
     }
     
-    //Label to change to the next year
+    //Label to change to the next month
     @FXML
-    public void nextYear(MouseEvent event) {
-        currentYearMonth = currentYearMonth.plusYears(1);
+    public void nextMonthButton(MouseEvent event) {
+        currentYearMonth = currentYearMonth.plusMonths(1);
+        month.setText(months[currentYearMonth.getMonthValue() - 1]);
+        updateCalendar(currentYearMonth);
+    }
+    
+    //Label to change to the previous year.
+    @FXML
+    public void previousYearButton(MouseEvent event) {
+        currentYearMonth = currentYearMonth.minusYears(1);
         year.setText(String.valueOf(currentYearMonth.getYear()));
         updateCalendar(currentYearMonth);
     }
-
-    //Label to change to the previous year.
+    
+    //Label to change to the next year
     @FXML
-    public void previousYear(MouseEvent event) {
-        currentYearMonth = currentYearMonth.minusYears(1);
+    public void nextYearButton(MouseEvent event) {
+        currentYearMonth = currentYearMonth.plusYears(1);
         year.setText(String.valueOf(currentYearMonth.getYear()));
         updateCalendar(currentYearMonth);
     }

@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -41,6 +42,8 @@ public class CreateAccountController implements Initializable {
     private PasswordField verifyPw;     // check that text matches original password
     @FXML
     private TextField email;    // check that text contains valid email address
+    @FXML
+    private Label incorrectRegistry;
     
     
     // Button to close GUI window
@@ -64,12 +67,15 @@ public class CreateAccountController implements Initializable {
     // After account creation return to login screen
     @FXML
     public void createAccount(ActionEvent event) throws IOException{
+        
         try {
             Statement query = Scheduler.connect.createStatement();
             query.executeQuery("USE Scheduler;");
             // ResultSet accountsData = query.executeQuery("SELECT username, passwd FROM Accounts;");
-                
-            
+            // accountsData.next();
+//            while () {
+//                
+//            }
             
             Parent loginScreen = FXMLLoader.load(getClass().getResource("Login.fxml"));
             Scene createAccount = new Scene(loginScreen);
@@ -78,11 +84,37 @@ public class CreateAccountController implements Initializable {
 
             window.setScene(createAccount);
             window.show();
-        } catch(SQLException sqlEx) {
-            sqlEx.printStackTrace();
+            
+            
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
-        
     }
+    
+    public boolean isAlpha(TextField tf) {
+        if (!tf.getText().isEmpty()) {
+            for (int i=0; i<tf.getText().length(); i++) {
+                if (!Character.isAlphabetic(tf.getText().charAt(i))) {
+                    return false;
+                }
+            }
+        } return true;
+    }
+    
+    public boolean isDigit(TextField tf) {
+        if (!tf.getText().isEmpty()) {
+            for (int i=0; i<tf.getText().length(); i++) {
+                if (!Character.isDigit(tf.getText().charAt(i))) {
+                    return false;
+                }
+            }
+        } return true;
+    }
+    
+    // VALIDAR PASSWORD
+    
     
     
     @Override

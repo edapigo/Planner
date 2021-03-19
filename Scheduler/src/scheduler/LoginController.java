@@ -55,43 +55,36 @@ public class LoginController implements Initializable {
         window.show();
     }
     
-    // create method to read a file (MAYBE NOT)
-    
     // Screen to show after user login
     @FXML
-    public void calendarScreen(ActionEvent event) throws IOException{
+    public void calendarScreen(ActionEvent event){
         
-        boolean auth = false;
-        boolean error = true;
-        
-        while (!auth && error){        
-            try {
-                Statement query = Scheduler.connect.createStatement();
-                query.executeQuery("USE Scheduler;");
-                ResultSet accountsData = query.executeQuery("SELECT username, passwd FROM Accounts;");
-                
-                while(accountsData.next()){
-                    if (username.getText().toLowerCase().contentEquals(accountsData.getString(1).toLowerCase()) &&
-                        password.getText().contentEquals(accountsData.getString(2))){
-                        auth = true;
-                        error = false;
-                        
-                        Parent loginScreen = FXMLLoader.load(getClass().getResource("Calendar.fxml"));
-                        Scene calendarScreen = new Scene(loginScreen);
+        try {
+            Statement query = Scheduler.connect.createStatement();
+            query.executeQuery("USE Scheduler;");
+            ResultSet accountsData = query.executeQuery("SELECT username, passwd FROM Accounts;");
+            accountsData.next();
+            
+            while (!(username.getText().toLowerCase().contentEquals(accountsData.getString(1).toLowerCase()) &&
+                    password.getText().contentEquals(accountsData.getString(2))) && accountsData.next()) {
+                if (username.getText().toLowerCase().contentEquals(accountsData.getString(1).toLowerCase()) &&
+                    password.getText().contentEquals(accountsData.getString(2))){
 
-                        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-                        
-                        window.setScene(calendarScreen);
-                        window.show();
-                    }
-                }
-                if (error){
+                    Parent loginScreen = FXMLLoader.load(getClass().getResource("Calendar.fxml"));
+                    Scene calendarScreen = new Scene(loginScreen);
+
+                    Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+                    window.setScene(calendarScreen);
+                    window.show();
+                } else {
                     incorrectLogin.setText("Nombre de usuario o contraseña incorrecto.\nPor favor, intente de nuevo.");
-                    error = false;
                 }
-            } catch(SQLException sqlEx){
-                sqlEx.printStackTrace();
-            }
+            } query.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
     }
     

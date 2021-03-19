@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -50,9 +49,6 @@
                <font>
                   <Font size="13.0" />
                </font>
-               <tooltip>
-                  <Tooltip text="holiiiiiiii" />
-               </tooltip>
             </Button>
             <Hyperlink layoutX="50.0" layoutY="322.0" text="¿Olvidó su contraseña?" textFill="#a49a9a">
                <font>
@@ -61,14 +57,14 @@
             </Hyperlink>
             <Text fx:id="incorrectLogin" fill="#e83434b2" fontSmoothingType="LCD" layoutX="50.0" layoutY="379.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="250.4000000000001">
                <font>
-                  <Font name="System Bold" size="13.0" />
+                  <Font name="System Bold" size="11.0" />
                </font>
             </Text>
          </children>
       </AnchorPane>
-      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="869.0" onMouseClicked="#close" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="859.0" layoutY="10.0" onMouseClicked="#close" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../resources/close.PNG" />
+            <Image url="@../resources/close.png" />
          </image>
       </ImageView>
    </children>

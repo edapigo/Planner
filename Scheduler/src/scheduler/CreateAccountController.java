@@ -7,6 +7,7 @@ package scheduler;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
@@ -44,13 +45,13 @@ public class CreateAccountController implements Initializable {
     @FXML
     private VBox userData;
     @FXML
-    private TextField fName;    // check that text is alphabetic
+    private TextField fName;    // check that text is alphabetic (2-15 characters long)
     @FXML
-    private TextField lName;    // check that text is alphabetic
+    private TextField lName;    // check that text is alphabetic (2-15 characters long)
     @FXML
-    private TextField username;     // check that text is alphanumeric
+    private TextField username;     // check that text is alphanumeric (4-20 characters long)
     @FXML
-    private PasswordField password;     // at least 8 characters long
+    private PasswordField password;     // at least 8 characters long (8-20 characters long)
     @FXML
     private PasswordField verifyPw;     // check that text matches original password
     @FXML
@@ -89,27 +90,27 @@ public class CreateAccountController implements Initializable {
 //        System.out.println(pwValidator(password, 8, 20));
 //        System.out.println(pwConfirmValidator(password, verifyPw)); 
 //        System.out.println(emailValidator(email));
-//        System.out.println("----------------------------");
+//        System.out.println("--------------------------------\n");
 
         try {
             Statement query = Scheduler.connect.createStatement();
             query.executeQuery("USE Scheduler;");
-            // ResultSet accountsData = query.executeQuery("SELECT username, passwd FROM Accounts;");
-            // accountsData.next();            
+            ResultSet accountsData = query.executeQuery("SELECT username FROM Accounts ORDER BY username ASC;");
+//            accountsData.next();
             boolean valid = false;
-            while (!valid) {
+            while (!valid && accountsData.next()) {
+                System.out.println(accountsData.getString(1)); // + "\t\t" + accountsData.getString(2));
                 valid = !emptyFieldsValidator(userData) && alphaValidator(fName, 2, 15) && alphaValidator(lName, 2, 15) && 
-                        alNumValidator(username, 4, 20) && pwValidator(password, 8, 20) && 
-                        pwConfirmValidator(password, verifyPw) && emailValidator(email);
-                if (valid) {
-                        
-                        // INSERT USER DATA IN SCHEDULER DB HERE!!!
-                    System.out.println("bien careverga");
-                        Parent loginScreen = FXMLLoader.load(getClass().getResource("Login.fxml"));
-                        Scene createAccount = new Scene(loginScreen);
-                        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-                        window.setScene(createAccount);
-                        window.show();
+                        alNumValidator(username, 4, 20) && !userTakenValidator(username, accountsData.getString(1)) && 
+                        pwValidator(password, 8, 20) && pwConfirmValidator(password, verifyPw) && emailValidator(email);
+                if (valid) {                        
+                    // INSERT USER DATA IN SCHEDULER DB HERE!!!
+                    System.out.println("bien hecho!");
+                    Parent loginScreen = FXMLLoader.load(getClass().getResource("Login.fxml"));
+                    Scene createAccount = new Scene(loginScreen);
+                    Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+                    window.setScene(createAccount);
+                    window.show();
                 } else if (emptyFieldsValidator(userData)) {
                     incorrectRegistry.setText("Debe llenar todos los campos para poder registrarse.\nIntente de nuevo.");
                 } else if (!alphaValidator(fName, 2, 15)) {
@@ -117,15 +118,16 @@ public class CreateAccountController implements Initializable {
                 } else if (!alphaValidator(lName, 2, 15)) {
                     incorrectRegistry.setText("Su apellido debe contener entre 2 y 15 caracteres alfabéticos.\nIntente "
                             + "de nuevo.");
-                } else if (alNumValidator(username, 4, 20)) {
+                } else if (!alNumValidator(username, 4, 20)) {
                     incorrectRegistry.setText("Su nombre de usuario debe contener entre 4 y 20 caracteres alfabéticos y/o "
                             + "numéricos.\nIntente de nuevo.");
-                } else if (pwValidator(password, 8, 20)) {
+                } else if (userTakenValidator(username, accountsData.getString(1))) {
+                     incorrectRegistry.setText("Nombre de usuario ya existe.\nIntente de nuevo.");
+                } else if (!pwValidator(password, 8, 20)) {
                     incorrectRegistry.setText("Su contraseña debe contener entre 8 y 20 caracteres.\nIntente de nuevo.");
-                } else if (pwConfirmValidator(password, verifyPw)) {
-                    incorrectRegistry.setText("Las contraseñas que ha ingresado no coinciden. Asegurese de ingresar la contraseña"
-                            + "por igual en ambos campos.\nIntente de nuevo.");
-                } else if (emailValidator(email)) {
+                } else if (!pwConfirmValidator(password, verifyPw)) {
+                    incorrectRegistry.setText("Las contraseñas que ha ingresado no coinciden.\nIntente de nuevo.");
+                } else if (!emailValidator(email)) {
                     incorrectRegistry.setText("No ha ingresado un correo electrónico válido.\nIntente de nuevo.");
                 }
             } query.close();
@@ -159,6 +161,10 @@ public class CreateAccountController implements Initializable {
             }
         } else return false;
         return tf.getText().length() >= minLength && tf.getText().length() <= maxLength;
+    }
+    
+    public boolean userTakenValidator(TextField user, String takenUser) {
+        return takenUser.toLowerCase().contentEquals(user.getText().toLowerCase());
     }
     
     public boolean pwValidator(PasswordField pwf, int minLength, int maxLength) {

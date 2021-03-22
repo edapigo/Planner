@@ -67,7 +67,6 @@ public class LoginController implements Initializable {
             Statement query = Scheduler.connect.createStatement();
             query.executeQuery("USE Scheduler;");
             ResultSet accountsData = query.executeQuery("SELECT username, passwd FROM Accounts;");
-//            accountsData.next();            
             boolean valid = false;
             while (!valid && accountsData.next()) {
                 valid = username.getText().toLowerCase().contentEquals(accountsData.getString(1).toLowerCase()) && 

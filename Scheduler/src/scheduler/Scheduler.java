@@ -43,8 +43,8 @@ public class Scheduler extends Application {
     public static void main(String[] args) {
         try{
             connect = DriverManager.getConnection(Scheduler.CONN_STRING, Scheduler.USERNAME, Scheduler.PASSWORD);
-        } catch(SQLException sqlEx) {
-            sqlEx.printStackTrace();
+        } catch(SQLException ex) {
+            System.out.println(ex.getMessage());
         }
         
         launch(args);

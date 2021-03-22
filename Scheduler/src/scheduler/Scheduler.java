@@ -28,7 +28,11 @@ public class Scheduler extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
+        
+        //Locale.setDefault(Locale.ENGLISH);
+        //ResourceBundle bundle = ResourceBundle.getBundle("lableText");
         Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+
         stage.initStyle(StageStyle.UNDECORATED);
         
         Scene scene = new Scene(root);

@@ -35,14 +35,14 @@
          </font>
       </Label>
       <DatePicker focusTraversable="false" layoutX="30.0" layoutY="140.0" />
-      <ComboBox focusTraversable="false" layoutX="211.0" layoutY="140.0" prefHeight="25.0" prefWidth="76.0" promptText="12:00" />
+      <ComboBox fx:id="startTime" focusTraversable="false" layoutX="211.0" layoutY="140.0" prefHeight="25.0" prefWidth="76.0" promptText="12:00" />
       <Label layoutX="31.0" layoutY="175.0" style="-fx-font-weight: bold;" text="End Date" textFill="#4d4d4d">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
       <DatePicker focusTraversable="false" layoutX="30.0" layoutY="201.0" />
-      <ComboBox focusTraversable="false" layoutX="211.0" layoutY="201.0" prefHeight="25.0" prefWidth="76.0" promptText="12:00" />
+      <ComboBox fx:id="endTime" focusTraversable="false" layoutX="211.0" layoutY="201.0" prefHeight="25.0" prefWidth="76.0" promptText="12:00" />
       <Button disable="true" layoutX="30.0" layoutY="361.0" mnemonicParsing="false" opacity="0.48" prefHeight="31.0" prefWidth="66.0" text="SAVE" />
       <TextArea focusTraversable="false" layoutX="30.0" layoutY="260.0" prefHeight="89.0" prefWidth="315.0" promptText="A short description of the task" />
       <Label layoutX="31.0" layoutY="234.0" style="-fx-font-weight: bold;" text="Details" textFill="#4d4d4d">

@@ -37,8 +37,7 @@ public class AnchorPaneNode extends AnchorPane {
                 System.out.println("This pane's date is: " + date);
                 Stage stage = new Stage();
                 stage.initStyle(StageStyle.UNDECORATED);
-                Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();
-                
+                Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();               
                 window.close();
 
                 try {

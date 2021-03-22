@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -9,7 +10,9 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: #6F9DD3;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scheduler.CreateAccountController">
    <children>
@@ -20,32 +23,64 @@
       </ImageView>
       <AnchorPane layoutX="489.0" layoutY="100.0" prefHeight="450.0" prefWidth="350.0" style="-fx-background-color: #C6CCD2;">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="50.0" layoutY="40.0" prefHeight="70.0" prefWidth="250.0" text="Creación de cuenta" textAlignment="CENTER" textFill="#00000070" textOverrun="CENTER_ELLIPSIS">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="50.0" layoutY="10.0" prefHeight="70.0" prefWidth="250.0" text="Creación de cuenta" textAlignment="CENTER" textFill="#00000070" textOverrun="CENTER_ELLIPSIS">
                <font>
                   <Font size="26.0" />
                </font>
             </Label>
-            <TextField fx:id="email" layoutX="50.0" layoutY="135.0" prefHeight="30.0" prefWidth="250.0" promptText="Correo electrónico" style="-fx-background-color: #E5E8EB;">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="username" layoutX="50.0" layoutY="183.0" prefHeight="30.0" prefWidth="250.0" promptText="Nombre de usuario" style="-fx-background-color: #E5E8EB;">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </TextField>
-            <PasswordField fx:id="password" layoutX="50.0" layoutY="232.0" prefHeight="30.0" prefWidth="250.0" promptText="Contraseña" style="-fx-background-color: #E5E8EB;">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </PasswordField>
-            <PasswordField fx:id="verifyPw" layoutX="50.0" layoutY="280.0" prefHeight="30.0" prefWidth="250.0" promptText="Repetir contraseña" style="-fx-background-color: #E5E8EB;">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </PasswordField>
-            <Button layoutX="50.0" layoutY="360.0" mnemonicParsing="false" onAction="#createAccount" prefHeight="30.0" prefWidth="250.0" text="Crear cuenta" textFill="#000000a0">
+            <VBox fx:id="userData" alignment="CENTER" fillWidth="false" focusTraversable="true" layoutY="80.0" prefHeight="249.0" prefWidth="350.0">
+               <children>
+                  <TextField fx:id="fName" prefHeight="30.0" prefWidth="250.0" promptText="Nombre" style="-fx-background-color: #E5E8EB;">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="50.0" right="50.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="lName" prefHeight="30.0" prefWidth="250.0" promptText="Apellido" style="-fx-background-color: #E5E8EB;">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="50.0" right="50.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="username" prefHeight="30.0" prefWidth="250.0" promptText="Nombre de usuario" style="-fx-background-color: #E5E8EB;">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="50.0" right="50.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <PasswordField fx:id="password" prefHeight="30.0" prefWidth="250.0" promptText="Contraseña" style="-fx-background-color: #E5E8EB;">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="50.0" right="50.0" top="5.0" />
+                     </VBox.margin>
+                  </PasswordField>
+                  <PasswordField fx:id="verifyPw" prefHeight="30.0" prefWidth="250.0" promptText="Repetir contraseña" style="-fx-background-color: #E5E8EB;">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="50.0" right="50.0" top="5.0" />
+                     </VBox.margin>
+                  </PasswordField>
+                  <TextField fx:id="email" prefHeight="30.0" prefWidth="250.0" promptText="Correo electrónico" style="-fx-background-color: #E5E8EB;">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="50.0" right="50.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+               </children>
+            </VBox>
+            <Button layoutX="50.0" layoutY="345.0" mnemonicParsing="false" onAction="#createAccountButton" prefHeight="30.0" prefWidth="250.0" text="Crear cuenta" textFill="#000000a0">
                <effect>
                   <Glow />
                </effect>
@@ -56,16 +91,21 @@
                   <Tooltip text="holi" />
                </tooltip>
             </Button>
+            <Text fx:id="incorrectRegistry" fill="#e83434b2" fontSmoothingType="LCD" layoutX="50.0" layoutY="400.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="250.4000000000001">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
-      <ImageView fitHeight="30.0" fitWidth="30.0" onMouseClicked="#login" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="5.0" layoutY="5.0" onMouseClicked="#returnButton" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../resources/return.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="869.0" onMouseClicked="#close" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="859.0" layoutY="10.0" onMouseClicked="#closeButton" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../resources/close.PNG" />
+            <Image url="@../resources/close.png" />
          </image>
       </ImageView>
    </children>

@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -25,7 +26,7 @@
             <Font size="13.0" />
          </font>
       </Label>
-      <Button layoutX="168.0" layoutY="489.0" mnemonicParsing="false" onAction="#createAccount" prefHeight="26.0" prefWidth="129.0" text="Crear cuenta" textFill="#909396" textOverrun="CENTER_ELLIPSIS" />
+      <Button layoutX="168.0" layoutY="489.0" mnemonicParsing="false" onAction="#createAccountButton" prefHeight="26.0" prefWidth="129.0" text="Crear cuenta" textFill="#909396" textOverrun="CENTER_ELLIPSIS" />
       <AnchorPane layoutX="489.0" layoutY="100.0" prefHeight="450.0" prefWidth="350.0" style="-fx-background-color: #C6CCD2;">
          <children>
             <Label alignment="CENTER" layoutX="50.0" layoutY="40.0" prefHeight="69.0" prefWidth="250.0" text="Inicio de sesión" textFill="#00000070">
@@ -33,42 +34,49 @@
                   <Font size="26.0" />
                </font>
             </Label>
-            <TextField fx:id="username" layoutX="50.0" layoutY="154.0" prefHeight="30.0" prefWidth="250.0" promptText="Nombre de usuario" style="-fx-background-color: #E5E8EB;">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </TextField>
-            <PasswordField fx:id="password" layoutX="50.0" layoutY="204.0" prefHeight="30.0" prefWidth="250.0" promptText="Contraseña" style="-fx-background-color: #E5E8EB;">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </PasswordField>
-            <Button contentDisplay="CENTER" layoutX="50.0" layoutY="292.0" mnemonicParsing="false" onAction="#calendarScreen" prefHeight="30.0" prefWidth="250.0" text="Iniciar sesión" textAlignment="CENTER" textFill="#000000a0" textOverrun="CENTER_ELLIPSIS">
+            <VBox fx:id="loginData" alignment="CENTER" fillWidth="false" layoutY="125.0" prefHeight="130.0" prefWidth="350.0">
+               <children>
+                  <TextField fx:id="username" prefHeight="30.0" prefWidth="250.0" promptText="Nombre de usuario" style="-fx-background-color: #E5E8EB;">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <PasswordField fx:id="password" prefHeight="30.0" prefWidth="250.0" promptText="Contraseña" style="-fx-background-color: #E5E8EB;">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </PasswordField>
+               </children>
+            </VBox>
+            <Button contentDisplay="CENTER" layoutX="50.0" layoutY="290.0" mnemonicParsing="false" onAction="#loginButton" prefHeight="30.0" prefWidth="250.0" text="Iniciar sesión" textAlignment="CENTER" textFill="#000000a0" textOverrun="CENTER_ELLIPSIS">
                <effect>
                   <Glow />
                </effect>
                <font>
                   <Font size="13.0" />
                </font>
-               <tooltip>
-                  <Tooltip text="holiiiiiiii" />
-               </tooltip>
             </Button>
-            <Hyperlink layoutX="50.0" layoutY="322.0" text="¿Olvidó su contraseña?" textFill="#a49a9a">
+            <Hyperlink layoutX="50.0" layoutY="320.0" text="¿Olvidó su contraseña?" textFill="#a49a9a">
                <font>
                   <Font size="10.0" />
                </font>
             </Hyperlink>
             <Text fx:id="incorrectLogin" fill="#e83434b2" fontSmoothingType="LCD" layoutX="50.0" layoutY="379.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="250.4000000000001">
                <font>
-                  <Font name="System Bold" size="13.0" />
+                  <Font name="System Bold" size="11.0" />
                </font>
             </Text>
          </children>
       </AnchorPane>
-      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="869.0" onMouseClicked="#close" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="859.0" layoutY="10.0" onMouseClicked="#closeButton" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../resources/close.PNG" />
+            <Image url="@../resources/close.png" />
          </image>
       </ImageView>
    </children>

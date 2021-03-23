@@ -20,7 +20,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputControl;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -69,19 +71,30 @@ public class LoginController implements Initializable {
             ResultSet accountsData = query.executeQuery("SELECT username, passwd FROM Accounts;");
             boolean valid = false;
             while (!valid && accountsData.next()) {
-                valid = username.getText().toLowerCase().contentEquals(accountsData.getString(1).toLowerCase()) && 
-                        password.getText().contentEquals(accountsData.getString(2));
+                valid = (username.getText().toLowerCase().contentEquals(accountsData.getString(1).toLowerCase()) && 
+                         password.getText().contentEquals(accountsData.getString(2)) && !emptyFieldsValidator(loginData));
                 if (valid) {
                     Parent loginScreen = FXMLLoader.load(getClass().getResource("Calendar.fxml"));
                     Scene calendarScreen = new Scene(loginScreen);
                     Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
                     window.setScene(calendarScreen);
                     window.show();
+                } else if (emptyFieldsValidator(loginData)) {
+                    incorrectLogin.setText("No ha ingresado usuario o contraseña.\nPor favor, intente de nuevo.");
                 } else incorrectLogin.setText("Nombre de usuario o contraseña incorrecto.\nPor favor, intente de nuevo.");
             } query.close(); 
         } catch (IOException | SQLException ex) {
             System.out.println(ex.getMessage());
         }
+    }
+    
+    public boolean emptyFieldsValidator(Pane container) {
+        for (Node child : container.getChildren()) {
+            if (child instanceof TextField) {
+                if (((TextInputControl) child).getText().isEmpty()) return true;
+            } else return true;
+        }
+        return false;
     }
     
         

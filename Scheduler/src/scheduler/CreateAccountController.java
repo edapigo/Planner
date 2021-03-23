@@ -149,8 +149,8 @@ public class CreateAccountController implements Initializable {
     
     public boolean alphaValidator(TextField tf, int minLength, int maxLength) {
         if (!tf.getText().isEmpty()) {
-            for (int i=0; i<tf.getText().replace(" ", "").length(); i++) {
-                if (!Character.isAlphabetic(tf.getText().replace(" ", "").charAt(i))) return false;
+            for (char c : tf.getText().replace(" ", "").toCharArray()) {
+                if (!Character.isAlphabetic(c)) return false;
             }
         } else return false;
         return tf.getText().length() >= minLength && tf.getText().length() <= maxLength;
@@ -158,8 +158,8 @@ public class CreateAccountController implements Initializable {
     
     public boolean alNumValidator(TextField tf, int minLength, int maxLength) {
         if (!tf.getText().isEmpty()) {
-            for (int i=0; i<tf.getText().replace(" ", "").length(); i++) {
-                if (!Character.isLetterOrDigit(tf.getText().replace(" ", "").charAt(i))) return false;
+            for (char c : tf.getText().replace(" ", "").toCharArray()) {
+                if (!Character.isLetterOrDigit(c)) return false;
             }
         } else return false;
         return tf.getText().length() >= minLength && tf.getText().length() <= maxLength;
@@ -173,8 +173,9 @@ public class CreateAccountController implements Initializable {
     
     public boolean pwValidator(PasswordField pwf, int minLength, int maxLength) {
         if (!pwf.getText().isEmpty()) {
-            for (int i = 0; i < pwf.getText().length(); i++) {
-                if (!Character.isBmpCodePoint(pwf.getText().charAt(i))) return false;
+//            for (int i = 0; i < pwf.getText().length(); i++) {
+            for (char c : pwf.getText().toCharArray()) {
+                if (!Character.isBmpCodePoint(c)) return false;
             }
         } else return false;
         return pwf.getText().length() >= minLength && pwf.getText().length() <= maxLength;

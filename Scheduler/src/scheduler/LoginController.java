@@ -39,7 +39,7 @@ public class LoginController implements Initializable {
     private PasswordField password;
     @FXML
     private Text incorrectLogin;
-        
+    
     // Button to closeButton GUI window
     @FXML
     public void closeButton(MouseEvent click) {
@@ -51,15 +51,15 @@ public class LoginController implements Initializable {
     public void createAccountButton(ActionEvent event) {
         try {
             Parent loginScreen = FXMLLoader.load(getClass().getResource("CreateAccount.fxml"));
-            Scene createAccount = new Scene(loginScreen);
+            Scene createAccountScreen = new Scene(loginScreen);
             Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-            window.setScene(createAccount);
+            window.setScene(createAccountScreen);
             window.show();
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
     }
-    
+
     // Screen to show after user login
     @FXML
     public void loginButton(ActionEvent event){

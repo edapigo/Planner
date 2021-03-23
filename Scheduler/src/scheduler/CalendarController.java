@@ -17,6 +17,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -55,16 +57,17 @@ public class CalendarController implements Initializable {
     @FXML
     public void logoutButton(MouseEvent click) {
         try {
-            Parent calendar = FXMLLoader.load(getClass().getResource("Login.fxml"));
-            Scene loginScreen = new Scene(calendar);
+            
+            Parent calendarScreen = FXMLLoader.load(getClass().getResource("Login.fxml"));
+            Scene loginScreen = new Scene(calendarScreen);
 
             Stage window = (Stage) ((Node) click.getSource()).getScene().getWindow();
 
             window.setScene(loginScreen);
             window.show();
-            } catch (IOException ex) {
-            ex.printStackTrace();
-            }
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     public void test(MouseEvent click) {
@@ -86,7 +89,6 @@ public class CalendarController implements Initializable {
                 daysOfCalendar.add(ap);
                 month.setText(months[currentYearMonth.getMonthValue() - 1]);
                 year.setText(String.valueOf(currentYearMonth.getYear()));
-
             }
         }
         //Update the days of the calendar
@@ -103,7 +105,7 @@ public class CalendarController implements Initializable {
         }
         // Update the calendar with days.
         for (AnchorPaneNode ap : daysOfCalendar) {
-            if (ap.getChildren().size() != 0) {
+            if (!ap.getChildren().isEmpty()) {
                 ap.getChildren().remove(0);
             }
             Text txt = new Text(String.valueOf(calendarDate.getDayOfMonth()));
@@ -145,5 +147,10 @@ public class CalendarController implements Initializable {
         currentYearMonth = currentYearMonth.plusYears(1);
         year.setText(String.valueOf(currentYearMonth.getYear()));
         updateCalendar(currentYearMonth);
+    }
+    
+    public void showInformationDialog(String message) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, message, ButtonType.OK);
+        alert.showAndWait();
     }
 }

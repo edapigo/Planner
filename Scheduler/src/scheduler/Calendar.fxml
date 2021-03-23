@@ -216,12 +216,12 @@
       </GridPane>
       <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="4.0" layoutY="5.0" onMouseClicked="#logoutButton" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../resources/logout.PNG" />
+            <Image url="@../resources/logout.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="859.0" layoutY="10.0" onMouseClicked="#closeButton" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../resources/close.PNG" />
+            <Image url="@../resources/close.png" />
          </image>
       </ImageView>
    </children>

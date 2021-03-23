@@ -86,15 +86,6 @@ public class CreateAccountController implements Initializable {
     // After account creation return to returnButton screen
     @FXML
     public void createAccountButton(ActionEvent event) {
-//        System.out.println(emptyFieldsValidator(userData));
-//        System.out.println(alphaValidator(fName, 2, 15));
-//        System.out.println(alphaValidator(lName, 2, 15));
-//        System.out.println(alNumValidator(username, 4, 20));
-//        System.out.println(pwValidator(password, 8, 20));
-//        System.out.println(pwConfirmValidator(password, verifyPw)); 
-//        System.out.println(emailValidator(email));
-//        System.out.println("--------------------------------\n");
-
         try {
             Statement query = Scheduler.connect.createStatement();
             query.executeQuery("USE Scheduler;");
@@ -114,7 +105,6 @@ public class CreateAccountController implements Initializable {
                     e_mail = email.getText();
                     query.executeQuery("CALL sp_create_account(\'" + firstName + "\', \'" + lastName + "\', \'" + accountName 
                                                                    + "\', \'" + pass + "\', \'" + e_mail + "\');");
-                    // SHOW DIALOG BOX INFORMdING ACCOUNT CREATION
                     showInformationDialog("Su cuenta ha sido creada exitosamente");
                     Parent loginScreen = FXMLLoader.load(getClass().getResource("Login.fxml"));
                     Scene createAccount = new Scene(loginScreen);

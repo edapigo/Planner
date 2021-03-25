@@ -27,7 +27,7 @@ public class Scheduler extends Application {
     public static final String PASSWORD = "1234";                                      // XTGS41zA
     public static final String CONN_STRING = "jdbc:mysql://localhost:3306/Scheduler";  // 35.185.90.173
     public static Connection connect;
-    public static Locale locale = new Locale("es","ES"); //To change languague to spanish use ("es","ES")
+    public static Locale locale = new Locale("en","US"); //To change languague to spanish use ("es","ES")
     
     @Override
     public void start(Stage stage) throws Exception {

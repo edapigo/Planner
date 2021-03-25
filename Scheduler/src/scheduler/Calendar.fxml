@@ -100,7 +100,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="120.0" text="Lunes" GridPane.halignment="CENTER">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="120.0" text="%label.monday" GridPane.halignment="CENTER">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -113,7 +113,7 @@
                   </LinearGradient>
                </textFill>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="120.0" text="Martes" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="120.0" text="%label.tuesday" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -126,7 +126,7 @@
                   </LinearGradient>
                </textFill>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="120.0" text="Miércoles" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="120.0" text="%label.wednesday" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -139,7 +139,7 @@
                   </LinearGradient>
                </textFill>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="120.0" text="Jueves" GridPane.columnIndex="3">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="120.0" text="%label.thursday" GridPane.columnIndex="3">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -152,7 +152,7 @@
                   </LinearGradient>
                </textFill>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="120.0" text="Viernes" GridPane.columnIndex="4">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="120.0" text="%label.friday" GridPane.columnIndex="4">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -165,7 +165,7 @@
                   </LinearGradient>
                </textFill>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="120.0" text="Sábado" GridPane.columnIndex="5">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="120.0" text="%label.saturday" GridPane.columnIndex="5">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -178,7 +178,7 @@
                   </LinearGradient>
                </textFill>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="120.0" text="Domingo" GridPane.columnIndex="6">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="120.0" text="%label.sunday" GridPane.columnIndex="6">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

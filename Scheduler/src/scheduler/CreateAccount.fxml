@@ -23,14 +23,14 @@
       </ImageView>
       <AnchorPane layoutX="489.0" layoutY="100.0" prefHeight="450.0" prefWidth="350.0" style="-fx-background-color: #C6CCD2;">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="50.0" layoutY="10.0" prefHeight="70.0" prefWidth="250.0" text="Creación de cuenta" textAlignment="CENTER" textFill="#00000070" textOverrun="CENTER_ELLIPSIS">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="50.0" layoutY="10.0" prefHeight="70.0" prefWidth="250.0" text="%label.create" textAlignment="CENTER" textFill="#00000070" textOverrun="CENTER_ELLIPSIS">
                <font>
                   <Font size="26.0" />
                </font>
             </Label>
             <VBox fx:id="userData" alignment="CENTER" fillWidth="false" focusTraversable="true" layoutY="80.0" prefHeight="249.0" prefWidth="350.0">
                <children>
-                  <TextField fx:id="fName" prefHeight="30.0" prefWidth="250.0" promptText="Nombre" style="-fx-background-color: #E5E8EB;">
+                  <TextField fx:id="fName" prefHeight="30.0" prefWidth="250.0" promptText="%label.name" style="-fx-background-color: #E5E8EB;">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -38,7 +38,7 @@
                         <Insets bottom="5.0" left="50.0" right="50.0" top="5.0" />
                      </VBox.margin>
                   </TextField>
-                  <TextField fx:id="lName" prefHeight="30.0" prefWidth="250.0" promptText="Apellido" style="-fx-background-color: #E5E8EB;">
+                  <TextField fx:id="lName" prefHeight="30.0" prefWidth="250.0" promptText="%label.lastName" style="-fx-background-color: #E5E8EB;">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -46,7 +46,7 @@
                         <Insets bottom="5.0" left="50.0" right="50.0" top="5.0" />
                      </VBox.margin>
                   </TextField>
-                  <TextField fx:id="username" prefHeight="30.0" prefWidth="250.0" promptText="Nombre de usuario" style="-fx-background-color: #E5E8EB;">
+                  <TextField fx:id="username" prefHeight="30.0" prefWidth="250.0" promptText="%label.user" style="-fx-background-color: #E5E8EB;">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -54,7 +54,7 @@
                         <Insets bottom="5.0" left="50.0" right="50.0" top="5.0" />
                      </VBox.margin>
                   </TextField>
-                  <PasswordField fx:id="password" prefHeight="30.0" prefWidth="250.0" promptText="Contraseña" style="-fx-background-color: #E5E8EB;">
+                  <PasswordField fx:id="password" prefHeight="30.0" prefWidth="250.0" promptText="%labe1.pass" style="-fx-background-color: #E5E8EB;">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -62,7 +62,7 @@
                         <Insets bottom="5.0" left="50.0" right="50.0" top="5.0" />
                      </VBox.margin>
                   </PasswordField>
-                  <PasswordField fx:id="verifyPw" prefHeight="30.0" prefWidth="250.0" promptText="Repetir contraseña" style="-fx-background-color: #E5E8EB;">
+                  <PasswordField fx:id="verifyPw" prefHeight="30.0" prefWidth="250.0" promptText="%label.repeatPass" style="-fx-background-color: #E5E8EB;">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -70,7 +70,7 @@
                         <Insets bottom="5.0" left="50.0" right="50.0" top="5.0" />
                      </VBox.margin>
                   </PasswordField>
-                  <TextField fx:id="email" prefHeight="30.0" prefWidth="250.0" promptText="Correo electrónico" style="-fx-background-color: #E5E8EB;">
+                  <TextField fx:id="email" prefHeight="30.0" prefWidth="250.0" promptText="%label.email" style="-fx-background-color: #E5E8EB;">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -80,7 +80,7 @@
                   </TextField>
                </children>
             </VBox>
-            <Button layoutX="50.0" layoutY="345.0" mnemonicParsing="false" onAction="#createAccountButton" prefHeight="30.0" prefWidth="250.0" text="Crear cuenta" textFill="#000000a0">
+            <Button layoutX="50.0" layoutY="345.0" mnemonicParsing="false" onAction="#createAccountButton" prefHeight="30.0" prefWidth="250.0" text="%btn.createAcc" textFill="#000000a0">
                <effect>
                   <Glow />
                </effect>

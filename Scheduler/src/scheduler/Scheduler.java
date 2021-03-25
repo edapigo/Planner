@@ -8,6 +8,8 @@ package scheduler;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,12 +27,14 @@ public class Scheduler extends Application {
     public static final String PASSWORD = "1234";                                      // XTGS41zA
     public static final String CONN_STRING = "jdbc:mysql://localhost:3306/Scheduler";  // 35.185.90.173
     public static Connection connect;
+    public static Locale locale = new Locale("es","ES"); //To change languague to spanish use ("es","ES")
     
     @Override
     public void start(Stage stage) throws Exception {
-        //Locale.setDefault(Locale.ENGLISH);
-        //ResourceBundle bundle = ResourceBundle.getBundle("lableText");
-        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+        //Internationalizing
+        ResourceBundle bundle = ResourceBundle.getBundle("files/labelText",locale);
+        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"),bundle);
+        
         stage.initStyle(StageStyle.UNDECORATED);
         Scene scene = new Scene(root);
         stage.setScene(scene);

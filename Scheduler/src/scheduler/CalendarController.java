@@ -37,6 +37,10 @@ public class CalendarController implements Initializable {
 
     @FXML
     private GridPane calendar;
+    @FXML
+    private Label month;
+    @FXML
+    private Label year;
     
     private YearMonth currentYearMonth;
     private final ArrayList<AnchorPaneNode> daysOfCalendar = new ArrayList<>(35);
@@ -45,10 +49,7 @@ public class CalendarController implements Initializable {
     String[] monthNames = new String[]{"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", 
                                        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
 
-    @FXML
-    private Label month;
-    @FXML
-    private Label year;
+    
     
     // Button to close GUI window
     @FXML
@@ -128,7 +129,11 @@ public class CalendarController implements Initializable {
         alert.initStyle(StageStyle.UNDECORATED);
         Optional<ButtonType> optionChose = alert.showAndWait();
         if (optionChose.orElse(cancel) == confirm) {
-            Parent calendarScreen = FXMLLoader.load(getClass().getResource("Login.fxml"));
+            
+            //Internationalizing
+            ResourceBundle bundle = ResourceBundle.getBundle("files/labelText",Scheduler.locale);
+            Parent calendarScreen = FXMLLoader.load(getClass().getResource("Login.fxml"),bundle);
+            
             Scene loginScreen = new Scene(calendarScreen);
             Stage window = (Stage) ((Node) click.getSource()).getScene().getWindow();
             window.setScene(loginScreen);

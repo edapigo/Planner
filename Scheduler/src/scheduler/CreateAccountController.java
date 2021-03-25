@@ -73,7 +73,10 @@ public class CreateAccountController implements Initializable {
     @FXML
     public void returnButton(MouseEvent click) {
         try {
-            Parent createAccountScreen = FXMLLoader.load(getClass().getResource("Login.fxml"));
+            //Internationalizing
+            ResourceBundle bundle = ResourceBundle.getBundle("files/labelText",Scheduler.locale);
+            Parent createAccountScreen = FXMLLoader.load(getClass().getResource("Login.fxml"),bundle);
+            
             Scene loginScreen = new Scene(createAccountScreen);
             Stage window = (Stage)((Node)click.getSource()).getScene().getWindow();
             window.setScene(loginScreen);

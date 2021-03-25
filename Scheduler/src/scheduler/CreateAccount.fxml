@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -23,12 +22,12 @@
       </ImageView>
       <AnchorPane layoutX="489.0" layoutY="100.0" prefHeight="450.0" prefWidth="350.0" style="-fx-background-color: #C6CCD2;">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="50.0" layoutY="10.0" prefHeight="70.0" prefWidth="250.0" text="Creación de cuenta" textAlignment="CENTER" textFill="#00000070" textOverrun="CENTER_ELLIPSIS">
+            <Label alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="50.0" layoutY="10.0" prefHeight="70.0" prefWidth="250.0" text="Creación de cuenta" textAlignment="CENTER" textFill="#00000070" textOverrun="CENTER_ELLIPSIS">
                <font>
                   <Font size="26.0" />
                </font>
             </Label>
-            <VBox fx:id="userData" alignment="CENTER" fillWidth="false" focusTraversable="true" layoutY="80.0" prefHeight="249.0" prefWidth="350.0">
+            <VBox fx:id="userData" alignment="CENTER" fillWidth="false" focusTraversable="true" layoutY="80.0" prefHeight="250.0" prefWidth="350.0">
                <children>
                   <TextField fx:id="fName" prefHeight="30.0" prefWidth="250.0" promptText="Nombre" style="-fx-background-color: #E5E8EB;">
                      <font>
@@ -87,9 +86,6 @@
                <font>
                   <Font size="13.0" />
                </font>
-               <tooltip>
-                  <Tooltip text="holi" />
-               </tooltip>
             </Button>
             <Text fx:id="incorrectRegistry" fill="#e83434b2" fontSmoothingType="LCD" layoutX="50.0" layoutY="400.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="250.4000000000001">
                <font>

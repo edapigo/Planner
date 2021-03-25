@@ -30,6 +30,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -173,7 +174,6 @@ public class CreateAccountController implements Initializable {
     
     public boolean pwValidator(PasswordField pwf, int minLength, int maxLength) {
         if (!pwf.getText().isEmpty()) {
-//            for (int i = 0; i < pwf.getText().length(); i++) {
             for (char c : pwf.getText().toCharArray()) {
                 if (!Character.isBmpCodePoint(c)) return false;
             }
@@ -206,6 +206,7 @@ public class CreateAccountController implements Initializable {
     
     public void showInformationDialog(String message) {
         Alert alert = new Alert(AlertType.NONE, message, ButtonType.OK);
+        alert.initStyle(StageStyle.UNDECORATED);
         alert.showAndWait();
     }
     

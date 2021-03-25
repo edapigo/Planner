@@ -5,13 +5,10 @@ import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 
 import java.time.LocalDate;
-import java.time.Month;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBoxBase;
 import javafx.scene.control.DatePicker;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -34,39 +31,31 @@ public class AnchorPaneNode extends AnchorPane {
     public AnchorPaneNode(Node... children) {
         super(children);
         // Add action handler for mouse clicked
-        this.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent e) {
-                System.out.println("This pane's date is: " + date);
-                
-                Stage stage = new Stage();
-                stage.initStyle(StageStyle.UNDECORATED);
-                Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();               
-                window.close();
-
-                try {
-                    
-                    Parent root = FXMLLoader.load(AnchorPaneNode.this.getClass().getResource("AddingTask.fxml"));
-                    
-                    fillDatePicker((Pane) root);
-                    
-                    stage.setScene(new Scene(root));
-                    stage.show();
-                } catch (IOException ex) {
-                    Logger.getLogger(AnchorPaneNode.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        this.setOnMouseClicked((MouseEvent e) -> {
+            System.out.println("This pane's date is: " + date);     // DELETE
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.UNDECORATED);
+            Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();
+            window.close();
+            try {
+                Parent root = FXMLLoader.load(AnchorPaneNode.this.getClass().getResource("AddTask.fxml"));
+                fillDatePicker((Pane) root);
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
             }
         });
     }
     
     /**
-     *  A methon to fill the DatePicker with the Date pressed
+     *  A method to fill the DatePicker with the Date pressed
      * @param container
      */
     public void fillDatePicker(Pane container) {
         for (Node child : container.getChildren()) {
             if (child instanceof DatePicker) {
-                ((DatePicker) child).setValue(LocalDate.of(date.getYear(), date.getMonth(), date.getDayOfMonth()));
+                ((ComboBoxBase<LocalDate>) child).setValue(LocalDate.of(date.getYear(), date.getMonth(), date.getDayOfMonth()));
             } 
         }
     }

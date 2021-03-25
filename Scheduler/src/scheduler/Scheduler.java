@@ -5,6 +5,7 @@
  */
 package scheduler;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -27,14 +28,18 @@ public class Scheduler extends Application {
     public static Connection connect;
     
     @Override
-    public void start(Stage stage) throws Exception {
-        //Locale.setDefault(Locale.ENGLISH);
-        //ResourceBundle bundle = ResourceBundle.getBundle("lableText");
-        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
-        stage.initStyle(StageStyle.UNDECORATED);
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    public void start(Stage stage)  {
+        try {
+            //Locale.setDefault(Locale.ENGLISH);
+            //ResourceBundle bundle = ResourceBundle.getBundle("lableText");
+            Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+            stage.initStyle(StageStyle.UNDECORATED);
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     /**

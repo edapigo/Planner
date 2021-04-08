@@ -32,7 +32,7 @@ public class AnchorPaneNode extends AnchorPane {
         super(children);
         // Add action handler for mouse clicked
         this.setOnMouseClicked((MouseEvent e) -> {
-            System.out.println("This pane's date is: " + date);     // DELETE
+//            System.out.println("This pane's date is: " + date);     // DELETE
             Stage stage = new Stage();
             stage.initStyle(StageStyle.UNDECORATED);
             Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();

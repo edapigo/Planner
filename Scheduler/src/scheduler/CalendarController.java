@@ -142,7 +142,7 @@ public class CalendarController implements Initializable {
         // TODO
         currentYearMonth = YearMonth.now();
         currentYearMonth.getMonthValue();
-        System.out.println(currentYearMonth);
+//        System.out.println(currentYearMonth);     // DELETE
         // Fill the GridPane with AnchorPaneNode
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 7; j++) {

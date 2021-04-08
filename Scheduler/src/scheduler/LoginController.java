@@ -41,6 +41,7 @@ public class LoginController implements Initializable {
     private PasswordField password;
     @FXML
     private Text incorrectLogin;
+    public static String loggedAccUsername;
     
     // Button to closeButton GUI window
     @FXML
@@ -74,6 +75,7 @@ public class LoginController implements Initializable {
                 valid = (username.getText().toLowerCase().contentEquals(accountsData.getString(1).toLowerCase()) && 
                          password.getText().contentEquals(accountsData.getString(2)) && !emptyFieldsValidator(loginData));
                 if (valid) {
+                    loggedAccUsername = username.getText();
                     Parent loginScreen = FXMLLoader.load(getClass().getResource("Calendar.fxml"));
                     Scene calendarScreen = new Scene(loginScreen);
                     Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -82,6 +84,8 @@ public class LoginController implements Initializable {
                 } else if (emptyFieldsValidator(loginData)) {
                     incorrectLogin.setText("No ha ingresado usuario o contraseña.\nPor favor, intente de nuevo.");
                 } else incorrectLogin.setText("Nombre de usuario o contraseña incorrecto.\nPor favor, intente de nuevo.");
+                username.clear();
+                password.clear();
             } query.close(); 
         } catch (IOException | SQLException ex) {
             System.out.println(ex.getMessage());

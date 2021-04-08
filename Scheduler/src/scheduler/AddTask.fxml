@@ -18,7 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scheduler.AddTaskController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scheduler.AddTaskController">
    <children>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" style="-fx-background-color: #6F9DD3;">
          <children>
@@ -80,7 +80,7 @@
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <TextArea fx:id="details" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="340.0" promptText="Agregue una descipción de su tarea (opcional)">
+                  <TextArea fx:id="overview" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="340.0" promptText="Agregue una descipción de su tarea (opcional, máx. 100 caracteres)">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -100,7 +100,7 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="120.0" prefWidth="200.0">
                <children>
                   <VBox prefHeight="200.0" prefWidth="150.0">
                      <children>
@@ -109,17 +109,20 @@
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <ListView fx:id="availableUsers" prefHeight="80.0" prefWidth="150.0" />
+                        <ListView fx:id="availableUsers" prefHeight="100.0" prefWidth="150.0" style="-fx-font: 10pt System;" />
                      </children>
                   </VBox>
-                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="40.0" spacing="10.0">
+                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="40.0" spacing="30.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0">
+                        <Button mnemonicParsing="false" onAction="#addUsersButton" prefHeight="35.0" prefWidth="35.0">
                            <font>
                               <Font size="1.0" />
                            </font>
                            <tooltip>
-                              <Tooltip text="Agregar" />
+                              <Tooltip id="Agregar" text="Agregar">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font></Tooltip>
                            </tooltip>
                            <graphic>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
@@ -128,10 +131,16 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0">
+                        <Button mnemonicParsing="false" onAction="#deleteUsersButton" prefHeight="35.0" prefWidth="35.0">
                            <tooltip>
-                              <Tooltip text="Eliminar" />
+                              <Tooltip id="Eliminar" text="Eliminar">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font></Tooltip>
                            </tooltip>
                            <font>
                               <Font size="1.0" />
@@ -156,14 +165,14 @@
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <ListView fx:id="addedUsers" prefHeight="80.0" prefWidth="150.0" />
+                        <ListView fx:id="addedUsers" prefHeight="100.0" prefWidth="150.0" />
                      </children>
                   </VBox>
                </children>
             </HBox>
             <HBox prefHeight="30.0" prefWidth="70.0" spacing="10.0">
                <children>
-                  <Button alignment="CENTER" contentDisplay="CENTER" maxWidth="30.0" mnemonicParsing="false" onAction="#saveTask" prefHeight="30.0" text="Guardar">
+                  <Button alignment="CENTER" contentDisplay="CENTER" maxWidth="30.0" mnemonicParsing="false" onAction="#saveTaskButton" prefHeight="30.0" text="Guardar">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -175,10 +184,13 @@
                         <Font size="1.0" />
                      </font>
                      <tooltip>
-                        <Tooltip text="Guardar" />
+                        <Tooltip id="Guardar" text="Guardar">
+                           <font>
+                              <Font size="13.0" />
+                           </font></Tooltip>
                      </tooltip>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancelTask" prefHeight="30.0" prefWidth="30.0">
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancelTaskButton" prefHeight="30.0" prefWidth="30.0">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -187,7 +199,10 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Cancelar" />
+                        <Tooltip id="Cancelar" text="Cancelar">
+                           <font>
+                              <Font size="13.0" />
+                           </font></Tooltip>
                      </tooltip>
                      <font>
                         <Font size="1.0" />

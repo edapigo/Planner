@@ -113,8 +113,8 @@ public class CalendarController implements Initializable {
             }
             Text txt = new Text(String.valueOf(calendarDate.getDayOfMonth()));
             ap.setDate(calendarDate);
-            ap.setTopAnchor(txt, 5.0);
-            ap.setLeftAnchor(txt, 5.0);
+            AnchorPaneNode.setTopAnchor(txt, 5.0);
+            AnchorPaneNode.setLeftAnchor(txt, 5.0);
             ap.getChildren().add(txt);
             calendarDate = calendarDate.plusDays(1);
         }
@@ -142,7 +142,6 @@ public class CalendarController implements Initializable {
         // TODO
         currentYearMonth = YearMonth.now();
         currentYearMonth.getMonthValue();
-//        System.out.println(currentYearMonth);     // DELETE
         // Fill the GridPane with AnchorPaneNode
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 7; j++) {

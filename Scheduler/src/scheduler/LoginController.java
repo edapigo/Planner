@@ -84,9 +84,9 @@ public class LoginController implements Initializable {
                 } else if (emptyFieldsValidator(loginData)) {
                     incorrectLogin.setText("No ha ingresado usuario o contraseña.\nPor favor, intente de nuevo.");
                 } else incorrectLogin.setText("Nombre de usuario o contraseña incorrecto.\nPor favor, intente de nuevo.");
-                username.clear();
-                password.clear();
             } query.close(); 
+            username.clear();
+            password.clear();
         } catch (IOException | SQLException ex) {
             System.out.println(ex.getMessage());
         }

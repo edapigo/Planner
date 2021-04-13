@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,6 +22,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ComboBoxBase;
 import javafx.scene.control.DatePicker;
@@ -34,6 +37,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -94,15 +98,19 @@ public class AddTaskController implements Initializable {
             if (valid) {
                 if ((dtValidator(startDate, endDate, "yyyy-MM-dd") == 0 && dtValidator(startTime, endTime, "H:mm") > 0) ||
                         dtValidator(startDate, endDate, "yyyy-MM-dd") > 0) {
-                    System.out.println("W P~");
-                    // IF TASK IS VALIDATED GO BACK TO CALENDAR SCREEN
+                    if(userLoggedIsAvailable()) {
+                        createTask();
+                        taskAllocation(getTaskId());
+                        taskCreationDialog(event);
+                    } else incorrectTaskData.setText("Usted ya tiene asignada una o más tareas en ese horario.\nSeleccione "
+                            + "otra fecha y hora de inicio y fin");
                 }
                 else incorrectTaskData.setText("El evento no puede finalizar antes o a la misma hora de inicio.\nIntente de nuevo.");
             } else if(emptyFieldsValidator(taskData))
                 incorrectTaskData.setText("Debe llenar todos los campos obligatorios.\nIntente de nuevo.");
             else if(dtValidator(startDate, endDate, "yyyy-MM-dd") < 0)
                 incorrectTaskData.setText("La fecha de inicio debe ser menor o igual que la fecha de fin.\nIntente de nuevo.");
-        } catch (ParseException ex) {
+        } catch (IOException | ParseException | SQLException ex) {
             System.out.println(ex.getMessage());
         }
     }
@@ -136,8 +144,7 @@ public class AddTaskController implements Initializable {
                     }
                 }
             }
-        }
-        return false;
+        } return false;
     }
     
     // VALIDATOR FOR DATE AND/OR TIME
@@ -157,19 +164,85 @@ public class AddTaskController implements Initializable {
     
     // ADD DATETIME IN WHERE CONDITION OF QUERY TO EXCLUDE USERS WHO ALREADY HAVE A TASK ON THAT DATE AND TIME
     // CHECK IF USER LOGGED IS BUSY ON DATE AND TIME SELECTED
-    public void updateAvailableUsers() throws SQLException {
+    public void getAvailableUsers() throws SQLException {
         availableUsers.getItems().clear();
+        addedUsers.getItems().clear();
         Statement query = Scheduler.connect.createStatement();
         query.executeQuery("USE Scheduler;");
         ResultSet users = query.executeQuery("SELECT * FROM Accounts "
-            + "WHERE username != \"" + LoginController.loggedAccUsername + "\" AND username != ALL(SELECT DISTINCT username "
+            + "WHERE username NOT LIKE \"" + LoginController.loggedAccUsername + "\" AND username != ALL(SELECT DISTINCT username "
             + "FROM Accounts acc JOIN Allocation a ON a.userId = acc.userId "
             + "WHERE ADDTIME(\"" + startDate.getValue() + " " + startTime.getValue() + "\", 1) BETWEEN beginning AND ending OR "
             + "SUBTIME(\"" + endDate.getValue() + " " + endTime.getValue() + "\", 1) BETWEEN beginning AND ending);");
         while(users.next()){
             if(!availableUsers.getItems().contains(users.getString("username")))
                 availableUsers.getItems().add(users.getString("username"));
-        }
+        } query.closeOnCompletion();
+    }
+    
+    public boolean userLoggedIsAvailable() throws SQLException {
+        Statement query = Scheduler.connect.createStatement();
+        query.executeQuery("USE Scheduler;");
+        ResultSet userTasks = query.executeQuery("SELECT * FROM Accounts acc JOIN Allocation a on a.userId=acc.userId "
+            + "WHERE username LIKE \"" + LoginController.loggedAccUsername + "\" AND "
+            + "(ADDTIME(\"" + startDate.getValue() + " " + startTime.getValue() + "\", 1) BETWEEN beginning AND ending OR "
+            + "SUBTIME(\"" + endDate.getValue() + " " + endTime.getValue() + "\", 1) BETWEEN beginning AND ending);");
+        return !userTasks.next();
+    }
+    
+    public void createTask() throws SQLException {
+        Statement insert = Scheduler.connect.createStatement();
+        if(!overview.getText().trim().isEmpty())
+            insert.executeUpdate("INSERT INTO Tasks(title, overview) "
+                              + "VALUE (\"" + title.getText().trim() + "\", \"" + overview.getText().trim() + "\");");
+        else insert.executeUpdate("INSERT INTO Tasks(title) "
+                               + "VALUE (\"" + title.getText().trim() + "\");");
+        insert.closeOnCompletion();
+    }
+    
+    public int getTaskId() throws SQLException {
+        Statement query = Scheduler.connect.createStatement();
+        ResultSet lastInsertId = query.executeQuery("SELECT LAST_INSERT_ID();");
+        lastInsertId.next();
+        query.closeOnCompletion();
+        return lastInsertId.getInt(1);
+    }
+    
+    public void taskAllocation(int taskId) throws SQLException {    // CALL userLoggedTaskAllocation
+        userLoggedTaskAllocation(taskId);
+        Statement query = Scheduler.connect.createStatement();
+        if(!addedUsers.getItems().isEmpty()) {
+            for(Object username : addedUsers.getItems()) {
+                ResultSet addedUserId = query.executeQuery("SELECT userId FROM Accounts WHERE username LIKE \"" 
+                        + username + "\";");
+                addedUserId.next();
+                query.executeUpdate("INSERT INTO Allocation VALUE(" + addedUserId.getInt(1) + ", " + taskId + ", \"" 
+                + startDate.getValue() + " " + startTime.getValue() + "\", \"" + endDate.getValue() + " " + endTime.getValue() + "\");");
+            }
+        } query.closeOnCompletion();
+    }
+
+    public void userLoggedTaskAllocation(int taskId) throws SQLException {
+        Statement query = Scheduler.connect.createStatement();
+        ResultSet loggedUserId = query.executeQuery("SELECT userId FROM Accounts WHERE username LIKE \"" 
+            + LoginController.loggedAccUsername + "\";");
+        loggedUserId.next();
+        query.executeUpdate("INSERT INTO Allocation VALUE(" + loggedUserId.getInt(1) + ", " + taskId + ", \"" 
+            + startDate.getValue() + " " + startTime.getValue() + "\", \"" + endDate.getValue() + " " + endTime.getValue() + "\");");
+        query.closeOnCompletion();
+    }
+    
+    public void taskCreationDialog(ActionEvent event) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "La tarea ha sido creada exitosamente");
+        alert.setHeaderText("Creación de tarea");
+        alert.initStyle(StageStyle.UNDECORATED);
+        Optional<ButtonType> optionChose = alert.showAndWait();
+        Parent addTaskScreen = FXMLLoader.load(getClass().getResource("Calendar.fxml"));
+        Scene calendarScreen = new Scene(addTaskScreen);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(calendarScreen);
+        window.centerOnScreen();
+        window.show();
     }
 
 
@@ -187,7 +260,7 @@ public class AddTaskController implements Initializable {
                     endDate.setValue(newValue);
                 if(startDate.getValue() != null && startTime.getValue() != null && 
                         endDate.getValue() != null && endTime.getValue() != null)
-                    updateAvailableUsers();
+                    getAvailableUsers();
             } catch (ParseException | SQLException ex) {
                 System.out.println(ex.getMessage());
             }
@@ -196,14 +269,15 @@ public class AddTaskController implements Initializable {
         // LISTENER FOR COMBOBOX:   startTime
         this.startTime.valueProperty().addListener((observable, oldValue, newValue) -> {
             try {
-                if(startDate.getValue() != null && endDate.getValue() != null)
-                    if(dtValidator(startDate, endDate, "yyyy-MM-dd") == 0)
-                        if(startTime.getValue() != null && endTime.getValue() != null && dtValidator(startTime, endTime, "H:mm") <= 0)
-                            endTime.setValue(timeSeparator(newValue.toString(), 30));
-                            if(newValue.toString().contentEquals("23:30")) endDate.setValue(endDate.getValue().plusDays(1));
+                if(startDate.getValue() != null && endDate.getValue() != null && dtValidator(startDate, endDate, "yyyy-MM-dd") == 0) {
+                    if(startTime.getValue() != null && endTime.getValue() != null && dtValidator(startTime, endTime, "H:mm") <= 0)
+                        endTime.setValue(timeSeparator(newValue.toString(), 30));
+                    if(endTime.getValue().toString().contentEquals("0:00")) 
+                        endDate.setValue(endDate.getValue().plusDays(1));
+                }
                 if(startDate.getValue() != null && startTime.getValue() != null && 
                         endDate.getValue() != null && endTime.getValue() != null)
-                    updateAvailableUsers();
+                    getAvailableUsers();
             } catch (ParseException | SQLException ex) {
                 System.out.println(ex.getMessage());
             }
@@ -215,7 +289,7 @@ public class AddTaskController implements Initializable {
                     startDate.setValue(newValue);
                 if(startDate.getValue() != null && startTime.getValue() != null && 
                         endDate.getValue() != null && endTime.getValue() != null)
-                    updateAvailableUsers();
+                    getAvailableUsers();
             } catch (ParseException | SQLException ex) {
                 System.out.println(ex.getMessage());
             }
@@ -232,7 +306,7 @@ public class AddTaskController implements Initializable {
 //                                startDate.setValue(startDate.getValue().minusDays(1));
                 if(startDate.getValue() != null && startTime.getValue() != null && 
                         endDate.getValue() != null && endTime.getValue() != null)
-                    updateAvailableUsers();
+                    getAvailableUsers();
             } catch (ParseException | SQLException ex) {
                 System.out.println(ex.getMessage());
             }

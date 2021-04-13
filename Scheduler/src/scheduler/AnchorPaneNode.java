@@ -90,7 +90,7 @@ public class AnchorPaneNode extends AnchorPane {
         this.date = date;
     }
     
-    // CHECK THAT NEAR TIME IS CORRECT
+    // CHECK THAT NEAR TIME IS CORRECT (check line 101)
     public String getNearTime(int minuteGap) {
         SimpleDateFormat sdf = new SimpleDateFormat("H:mm");
         Date now = new Date();

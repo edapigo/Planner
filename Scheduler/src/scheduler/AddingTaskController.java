@@ -71,6 +71,10 @@ public class AddingTaskController implements Initializable {
         System.out.println("No esta vacio");
         return false;
     }
+    
+    public void reminder(users ArrayList<User>) {
+    
+    }
 
 //    public boolean 
     @FXML

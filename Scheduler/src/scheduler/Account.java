@@ -26,7 +26,7 @@ public class Account {
         return this.userId;
     }
   
-    public int getUser() {
+    public String getUser() {
         return this.user;
     }
 }

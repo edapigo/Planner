@@ -72,7 +72,7 @@ public class AddingTaskController implements Initializable {
         return false;
     }
     
-    public void reminder(users ArrayList<User>) {
+    public void reminder(accounts ArrayList<Account>) {
     
     }
 
